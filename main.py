@@ -1,22 +1,23 @@
 from Board import *
+from Solver import Solver
+from SudokuGenerator import SudokuGenerator
+
 
 def main():
     board = Board()
 
-    board.grid[0][0].set_value(5)
-    board.grid[0][1].set_value(3)
-    board.grid[1][0].set_value(6)
-    board.grid[4][4].set_value(7)
-    board.grid[8][8].set_value(9)
+    gen = SudokuGenerator(board)
+    gen.generate_sudoku(empty_cells=40)
 
-    print("\n--- Initial Board ---")
+    print("Generated Sudoku:")
     board.print_board()
 
-    row, col, value = 2, 2, 4
-    print(f"\n--- Setting Value {value} at ({row}, {col}) ---")
-    board.grid[row][col].set_value(value)
-    board.print_board()
-
+    solver = Solver(board)
+    if solver.solve():
+        print("\nSolved Sudoku:")
+        board.print_board()
+    else:
+        print("\nFailed to solve Sudoku:")
 
 if __name__ == "__main__":
     main()

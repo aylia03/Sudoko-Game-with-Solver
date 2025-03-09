@@ -49,3 +49,8 @@ class Board:
                 row_values.append(str(value))
 
             print(" ".join(row_values))
+
+    def reset_grid(self):
+        for row in range(self.size):
+            for col in range(self.size):
+                self.grid[row][col].reset()
